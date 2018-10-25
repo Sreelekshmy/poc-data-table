@@ -1,8 +1,12 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
 
+<!--dom-module - wraps an element's local DOM definition-->
 <dom-module id="custom-grid">
+  <!--template defines element's local DOM structure and styling-->
   <template>
+    <!-- Scoped style to the local DOM-->
     <style>
       .custom-grid-wrapper{
           display: block;
@@ -30,24 +34,40 @@
           padding: 3px 1.8%;
           width: 28%;
       }
+      iron-icon {
+        fill: rgba(223, 22, 22, 0);
+        stroke: red;
+      }
+      .icon-class{
+        float: right;
+      }
     </style>
     <div class="custom-grid-wrapper">
+      <!--Data binding-->
       <h2>{{title}}</h2>
       <div class="grid-headers">
         <div class="grid-header">First Name</div>
         <div class="grid-header">Last Name</div>
         <div class="grid-header">Email</div>
       </div>
+      <!--Rendering dom based on a collection content-->
         <template is="dom-repeat" items="{{employees}}">
           <div class="grid-cells">
-            <div class="grid-cell">{{item.firstName}}</div>
+            <div class="grid-cell">
+              <span>{{item.firstName}}</span>
+              <span class="icon-class">
+                <!--Rending icon using "iron-icon" module, possible values: info, star, warning ... -->
+                <iron-icon icon="warning"></iron-icon>
+              </span>
+            </div>
             <div class="grid-cell">{{item.lastName}}</div>
             <div class="grid-cell">{{item.emailid}}</div>
           </div>
         </template>
     </div>
+    <!--Polymer iron-ajax for making Ajax calls in Polymer custom components-->
     <iron-ajax
-        auto
+        id="polymerAjax"
         url="data/data.json",
         handle-as="json"
         on-response="handleResponse"
@@ -56,27 +76,24 @@
   </template>
   
   <script>
+    //Registering localDOM in polymer
     Polymer({
-      is: "custom-grid",
-      properties:{
+      is: "custom-grid",//Name of custom element
+      properties:{//Defining component specific variables.
         title:{
-          type:String,
-          value: "User list"
+          type:String
+        },
+        employees:{
+          type:Array
         }
       },
       ready: function(){
-        this.employees = [
-          {
-            "firstName": "Sreelekshmy",
-            "lastName": "S",
-            "emailid": "sree.s@domain.com"
-          },
-          {
-            "firstName": "Reya",
-            "lastName": "Pillai",
-            "emailid": "reya.pillai@domain.com"
-          }
-        ];
+        this.title = "User list";//initailizing component variable
+        //Calling Ajax on localDOM ready lifecycle callback
+        polymerAjax.generateRequest();
+      },
+      handleResponse:function(event, request){//Callback function for polymer-iron-ajax 
+        this.employees = request.response;
       }
     });
   </script>

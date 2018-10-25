@@ -1,12 +1,12 @@
 [
     {
-    "firstName": "Sreelekshmy",
-    "lastName": "S",
-    "emailid": "sree.s@domain.com"
+        "firstName": "Sreelekshmy",
+        "lastName": "S",
+        "emailid": "sreelekshmy.s@domain.com"
     },
     {
-    "firstName": "Reya",
-    "lastName": "Pillai",
-    "emailid": "reya.pillai@domain.com"
+        "firstName": "Reya",
+        "lastName": "Pillai",
+        "emailid": "reya.pillai@domain.com"
     }
 ]
