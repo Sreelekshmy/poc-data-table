@@ -1,0 +1,17 @@
+{
+  "name": "POC",
+  "version": "1.0.0",
+  "description": "This repo goes with the [Build your first Polymer element codelab](http://www.code-labs.io/codelabs/polymer-first-elements/).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@granite-elements/granite-bootstrap": "^4.1.1-1",
+    "@polymer/iron-ajax": "^3.0.1",
+    "bootstrap": "^4.1.3"
+  }
+}

@@ -1,0 +1,83 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+
+<dom-module id="custom-grid">
+  <template>
+    <style>
+      .custom-grid-wrapper{
+          display: block;
+          width: 90%;
+          margin: 0 auto;
+          position: relative;
+      }
+      .custom-grid-wrapper:after {
+          visibility: hidden;
+          display: block;
+          font-size: 0;
+          content: " ";
+          clear: both;
+          height: 0;
+      }
+      .custom-grid-wrapper .grid-header{
+          background-color: #ccc;
+      }
+      .custom-grid-wrapper .grid-header, 
+      .custom-grid-wrapper .grid-cell { 
+          border: 1px solid #999999;
+          float: left;
+          height: 20px;
+          overflow: hidden;
+          padding: 3px 1.8%;
+          width: 28%;
+      }
+    </style>
+    <div class="custom-grid-wrapper">
+      <h2>{{title}}</h2>
+      <div class="grid-headers">
+        <div class="grid-header">First Name</div>
+        <div class="grid-header">Last Name</div>
+        <div class="grid-header">Email</div>
+      </div>
+        <template is="dom-repeat" items="{{employees}}">
+          <div class="grid-cells">
+            <div class="grid-cell">{{item.firstName}}</div>
+            <div class="grid-cell">{{item.lastName}}</div>
+            <div class="grid-cell">{{item.emailid}}</div>
+          </div>
+        </template>
+    </div>
+    <iron-ajax
+        auto
+        url="data/data.json",
+        handle-as="json"
+        on-response="handleResponse"
+        debounce-duration="300">
+    </iron-ajax>
+  </template>
+  
+  <script>
+    Polymer({
+      is: "custom-grid",
+      properties:{
+        title:{
+          type:String,
+          value: "User list"
+        }
+      },
+      ready: function(){
+        this.employees = [
+          {
+            "firstName": "Sreelekshmy",
+            "lastName": "S",
+            "emailid": "sree.s@domain.com"
+          },
+          {
+            "firstName": "Reya",
+            "lastName": "Pillai",
+            "emailid": "reya.pillai@domain.com"
+          }
+        ];
+      }
+    });
+  </script>
+</dom-module>
