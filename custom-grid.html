@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../px-modal/px-modal.html"/>
 
 <!--dom-module - wraps an element's local DOM definition-->
 <dom-module id="custom-grid">
@@ -73,6 +74,13 @@
         on-response="handleResponse"
         debounce-duration="300">
     </iron-ajax>
+    <px-modal
+        header-text="Confirm delete"
+        body-text="Do you want to delete this record? The record will be deleted permanently."
+        accept-text="Permanently Delete Record"
+        reject-text="Cancel"
+        opened>
+    </px-modal>
   </template>
   
   <script>
@@ -87,6 +95,9 @@
           type:Array
         }
       },
+      listeners:{// set up event handlers using "listners" Object
+        'tap': 'showPopup'// Mapping tab event to showpopup handler
+      },
       ready: function(){
         this.title = "User list";//initailizing component variable
         //Calling Ajax on localDOM ready lifecycle callback
@@ -94,6 +105,9 @@
       },
       handleResponse:function(event, request){//Callback function for polymer-iron-ajax 
         this.employees = request.response;
+      },
+      showPopup: function(){
+
       }
     });
   </script>
