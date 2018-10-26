@@ -33,7 +33,7 @@
           height: 20px;
           overflow: hidden;
           padding: 3px 1.8%;
-          width: 28%;
+          width: 20%;
       }
       iron-icon {
         fill: rgba(223, 22, 22, 0);
@@ -50,6 +50,7 @@
         <div class="grid-header">First Name</div>
         <div class="grid-header">Last Name</div>
         <div class="grid-header">Email</div>
+        <div class="grid-header"></div>
       </div>
       <!--Rendering dom based on a collection content-->
         <template is="dom-repeat" items="{{employees}}">
@@ -63,6 +64,13 @@
             </div>
             <div class="grid-cell">{{item.lastName}}</div>
             <div class="grid-cell">{{item.emailid}}</div>
+            <div class="grid-cell">
+                <px-modal modal-heading="User Name: {{item.firstName}} {{item.lastName}}" btn-modal-negative="Ok">
+                    <a href="#" class="btn btn--primary modal-trigger">Show user</a>
+                    <p>Here</p>
+                  </px-modal>
+            </div>
+           
           </div>
         </template>
     </div>
@@ -74,13 +82,6 @@
         on-response="handleResponse"
         debounce-duration="300">
     </iron-ajax>
-    <px-modal
-        header-text="Confirm delete"
-        body-text="Do you want to delete this record? The record will be deleted permanently."
-        accept-text="Permanently Delete Record"
-        reject-text="Cancel"
-        opened>
-    </px-modal>
   </template>
   
   <script>
